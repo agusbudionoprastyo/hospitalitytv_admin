@@ -883,15 +883,6 @@ body{
 .\!right-1{
   right: 0.25rem !important;
 }
-.-right-0{
-  right: -0px;
-}
-.-right-0\.5{
-  right: -0.125rem;
-}
-.-right-16{
-  right: -4rem;
-}
 .-right-27{
   right: -6.75rem;
 }
@@ -909,6 +900,9 @@ body{
 }
 .bottom-1{
   bottom: 0.25rem;
+}
+.bottom-5{
+  bottom: 1.25rem;
 }
 .left-0{
   left: 0px;
@@ -1252,9 +1246,6 @@ body{
 .h-90{
   height: 22.5rem;
 }
-.h-auto{
-  height: auto;
-}
 .h-full{
   height: 100%;
 }
@@ -1281,9 +1272,6 @@ body{
 }
 .w-12{
   width: 3rem;
-}
-.w-12\.5{
-  width: 3.125rem;
 }
 .w-14{
   width: 3.5rem;
@@ -1330,9 +1318,6 @@ body{
 .w-72\.5{
   width: 18.125rem;
 }
-.w-75{
-  width: 18.75rem;
-}
 .w-8{
   width: 2rem;
 }
@@ -1347,6 +1332,9 @@ body{
 }
 .w-\[300\%\]{
   width: 300%;
+}
+.w-\[36px\]{
+  width: 36px;
 }
 .w-full{
   width: 100%;
@@ -1398,6 +1386,9 @@ body{
 }
 .max-w-\[36px\]{
   max-width: 36px;
+}
+.max-w-\[400px\]{
+  max-width: 400px;
 }
 .max-w-full{
   max-width: 100%;
@@ -1879,6 +1870,10 @@ body{
 .bg-primary{
   --tw-bg-opacity: 1;
   background-color: rgb(60 80 224 / var(--tw-bg-opacity));
+}
+.bg-red-500{
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 .bg-secondary{
   --tw-bg-opacity: 1;
@@ -2931,6 +2926,23 @@ body{
   border-color: #3c50e0;
 }
 
+#notifications-list {
+  overflow-y: auto;
+}
+
+#notifications-list::-webkit-scrollbar {
+  display: none; /* Sembunyikan scrollbar */
+}
+
+/* Jika ingin di semua elemen dalam div tersebut */
+.absolute {
+  overflow-y: auto;
+}
+
+.absolute::-webkit-scrollbar {
+  display: none;
+}
+
 .file\:mr-4::-webkit-file-upload-button{
   margin-right: 1rem;
 }
@@ -3346,6 +3358,11 @@ body{
 .dark .dark\:text-\[\#34D399\]{
   --tw-text-opacity: 1;
   color: rgb(52 211 153 / var(--tw-text-opacity));
+}
+
+.dark .dark\:text-\[\#FF4B4B\]{
+  --tw-text-opacity: 1;
+  color: rgb(255 75 75 / var(--tw-text-opacity));
 }
 
 .dark .dark\:text-bodydark{
@@ -3873,4 +3890,3 @@ body{
     padding-right: 1.875rem;
   }
 }
-
