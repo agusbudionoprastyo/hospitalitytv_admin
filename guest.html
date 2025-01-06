@@ -1156,54 +1156,26 @@ document.getElementById('close-modal').addEventListener('click', () => {
   document.getElementById('edit-modal').classList.add('hidden');
 });
 
-// document.getElementById('update-guest-form').addEventListener('submit', async (event) => {
-//   event.preventDefault();
+// Fungsi untuk menampilkan toast
+function showToast(message, type = 'success') {
+  const toast = document.getElementById('success-toast');
+  const toastMessage = toast.querySelector('.toast-message');
   
-//   const folio = event.target.getAttribute('data-folio');
-//   const updatedGuest = { ...guests[folio] };  // Menyalin data tamu sebelum update
+  // Sesuaikan kelas berdasarkan tipe (success atau error)
+  toast.classList.remove('bg-green-500', 'bg-red-500');
+  toast.classList.add(type === 'error' ? 'bg-red-500' : 'bg-green-500');
   
-//   const fileInput = document.querySelector('#edit-photo');
-//   let imageUrl = null;
+  toastMessage.textContent = message;
+  
+  // Tampilkan toast
+  toast.classList.add('show');
+  
+  // Sembunyikan toast setelah 3 detik
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
+}
 
-//   // Jika ada file gambar yang dipilih
-//   if (fileInput.files && fileInput.files[0]) {
-//     const file = fileInput.files[0];
-//     const formData = new FormData();
-//     formData.append('image', file);
-
-//     try {
-//       // Kirim file ke server PHP untuk di-upload
-//       const response = await fetch('upload.php', {
-//         method: 'POST',
-//         body: formData
-//       });
-      
-//       const result = await response.json();
-//       if (result.success) {
-//         // Gambar berhasil di-upload, simpan URL-nya
-//         imageUrl = result.imageUrl;
-//         updatedGuest.photoUrl = imageUrl;
-        
-//         // Update the image URL under GUESTIMAGE/{folio}/imageUrl
-//         await set(ref(db, `GUESTIMAGE/${folio}/imageUrl`), imageUrl);
-//       } else {
-//         alert(result.message || 'Upload gambar gagal!');
-//         return;
-//       }
-//     } catch (error) {
-//       console.error("Error uploading image:", error);
-//       alert("Gagal meng-upload gambar.");
-//       return;
-//     }
-//   }
-
-//   // Jika ada perubahan, perbarui data tamu di lokal
-//   guests[folio] = updatedGuest;
-
-//   // Setelah gambar berhasil diupload, Anda bisa menutup modal dan memperbarui tampilan tabel
-//   displayGuests(); // Memperbarui tampilan tabel
-//   document.getElementById('edit-modal').classList.add('hidden'); // Menutup modal
-// });
 document.getElementById('update-guest-form').addEventListener('submit', async (event) => {
   event.preventDefault();
   
@@ -1232,7 +1204,7 @@ document.getElementById('update-guest-form').addEventListener('submit', async (e
       
       if (result.success) {
         // Gambar berhasil di-upload, simpan URL-nya
-        imageUrl = result.imageUrl;
+        imageUrl = 'https://hospitalitytv.dafam.cloud/' + result.imageUrl;
         updatedGuest.photoUrl = imageUrl;
 
         // Log URL yang ingin disimpan di Firebase
@@ -1240,6 +1212,9 @@ document.getElementById('update-guest-form').addEventListener('submit', async (e
 
         // Update the image URL under GUESTIMAGE/{folio}/imageUrl
         await set(ref(db, `GUESTIMAGE/${folio}/imageUrl`), imageUrl);
+
+        // Menampilkan toast berhasil
+        showToast('Gambar berhasil di-upload dan data berhasil diperbarui!', 'success');
       } else {
         alert(result.message || 'Upload gambar gagal!');
         return;
@@ -1247,19 +1222,15 @@ document.getElementById('update-guest-form').addEventListener('submit', async (e
     } catch (error) {
       console.error("Error uploading image:", error);
       alert("Gagal meng-upload gambar.");
+      showToast('Gagal meng-upload gambar.', 'error');
       return;
     }
   }
-
-  // Jika ada perubahan, perbarui data tamu di lokal
-  guests[folio] = updatedGuest;
 
   // Setelah gambar berhasil diupload, Anda bisa menutup modal dan memperbarui tampilan tabel
   displayGuests(); // Memperbarui tampilan tabel
   document.getElementById('edit-modal').classList.add('hidden'); // Menutup modal
 });
-
-
 </script>
   
   <!-- HTML untuk Menampilkan Tabel dan Form Edit -->
@@ -1296,11 +1267,6 @@ document.getElementById('update-guest-form').addEventListener('submit', async (e
     <!-- Modal Content -->
     <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-8 dark:bg-boxdark">
       <!-- Modal Header -->
-      <!-- <button id="close-modal" class="flex justify-center rounded px-6 py-2 font-medium text-black hover:shadow-1 dark:border-strokedark dark:text-white">
-      Cancel
-      </button> -->
-
-      
         <div class="flex justify-between items-center pb-7">
         <h3 class="font-medium text-black dark:text-white">
           Edit Guest Information
@@ -1315,13 +1281,6 @@ document.getElementById('update-guest-form').addEventListener('submit', async (e
             <div
               class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark"
             >
-              <!-- <div
-                class="border-b border-stroke px-7 py-4 dark:border-strokedark"
-              >
-                <h3 class="font-medium text-black dark:text-white">
-                  Guest Details
-                </h3>
-              </div> -->
               <div class="p-7">
                   <div class="mb-4 flex items-center gap-3">
                     <div class="h-14 w-14 rounded-full">
@@ -1413,6 +1372,15 @@ document.getElementById('update-guest-form').addEventListener('submit', async (e
             </div>
             <!-- ====== Table Section End -->
           </div>
+          <!-- Toast container -->
+          <div id="toast-container" class="toast-container fixed bottom-0 right-0 p-4 z-50">
+            <!-- Toast -->
+            <div id="success-toast" class="toast hidden bg-green-500 text-white p-3 rounded-lg shadow-lg flex items-center space-x-2">
+              <span class="material-icons">check_circle</span>
+              <span class="toast-message">Gambar berhasil di-upload dan data berhasil diperbarui!</span>
+            </div>
+          </div>
+
         </main>
         <!-- ===== Main Content End ===== -->
 
