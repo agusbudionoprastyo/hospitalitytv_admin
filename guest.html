@@ -943,281 +943,265 @@
             <!-- ====== Table Section Start -->
             <div class="flex flex-col gap-10">
               <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-    import { getDatabase, ref, get, set, update } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
-    
-    // Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyDRx8YRkKK3ZmLjhZdhyqlvW7ey7A6Fhyk",
-      authDomain: "dafamhospitalitytv.firebaseapp.com",
-      databaseURL: "https://dafamhospitalitytv-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "dafamhospitalitytv",
-      storageBucket: "dafamhospitalitytv.firebasestorage.app",
-      messagingSenderId: "880529592485",
-      appId: "1:880529592485:web:3d62d2ada4b7036bb07d4c",
-      measurementId: "G-402MDJFVR5"
-    };
-    
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    
-    // Reference to 'FOGUEST' node
-    const guestRef = ref(db, 'FOGUEST');
-    
-    // Variabel untuk menyimpan data tamu dan posisi data
-    let guests = {};
-    let startIndex = 0;
-    const limit = 10;  // Jumlah data per halaman
-    let totalPages = 0;
-    
-    // Fungsi untuk mengambil data tamu dari Firebase
-    async function getGuests() {
-      try {
-        const snapshot = await get(guestRef);
-        if (snapshot.exists()) {
-          guests = snapshot.val();
-          totalPages = Math.ceil(Object.keys(guests).length / limit);
-          displayGuests();
-          generatePagination();
-        } else {
-          console.log("No data available");
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    }
-    
-    // Fungsi untuk menampilkan data tamu
-    function displayGuests() {
-      const tableBody = document.getElementById('table-body');
-      
-      // Kosongkan data lama
-      tableBody.innerHTML = '';
-    
-      // Ambil data sesuai dengan startIndex dan limit
-      const guestsToShow = Object.values(guests).slice(startIndex, startIndex + limit);
-    
-      // Loop dan tambahkan baris ke tabel
-      guestsToShow.forEach(guest => {
-        const row = document.createElement('tr');
-        
-        // Tentukan status berdasarkan nilai foliostatus (hapus spasi ekstra dengan .trim())
-        let statusLabel = '';
-        let statusClass = '';
-        const status = guest.foliostatus.trim();  // Menghapus spasi ekstra
-    
-        switch (status) {
-          case 'T':
-            statusLabel = 'Tentative';
-            statusClass = 'inline-flex rounded-full bg-warning bg-opacity-10 px-3 py-1 text-sm font-medium text-warning';
-            break;
-          case 'O':
-            statusLabel = 'Check-out';
-            statusClass = 'inline-flex rounded-full bg-danger bg-opacity-10 px-3 py-1 text-sm font-medium text-danger';
-            break;
-          case 'I':
-            statusLabel = 'In-house';
-            statusClass = 'inline-flex rounded-full bg-success bg-opacity-10 px-3 py-1 text-sm font-medium text-success';
-            break;
-          case 'C':
-            statusLabel = 'Confirmed';
-            statusClass = 'inline-flex rounded-full bg-secondary bg-opacity-10 px-3 py-1 text-sm font-medium text-secondary';
-            break;
-          case 'X':
-            statusLabel = 'Cancelled';
-            statusClass = 'inline-flex rounded-full bg-info bg-opacity-10 px-3 py-1 text-sm font-medium text-info';
-            break;
-          case 'G':
-            statusLabel = 'Guaranteed';
-            statusClass = 'inline-flex rounded-full bg-primary bg-opacity-10 px-3 py-1 text-sm font-medium text-primary';
-            break;
-          default:
-            statusLabel = 'Unknown';
-            statusClass = 'bg-gray-300 text-black dark:text-white';
-        }
-    
-        row.innerHTML = `
-          <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
-            <h5 class="font-medium text-black dark:text-white">${guest.fname}</h5>
-            <p class="text-sm">${guest.room}</p>
-          </td>
-          <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-            <h5 class="font-medium text-black dark:text-white">${guest.dateci}</h5>
-            <p class="text-sm">${guest.dateco}</p>
-          </td>
-          <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-            <p class="inline-flex rounded-full ${statusClass} bg-opacity-10 px-3 py-1 text-sm font-medium">
-              ${statusLabel}
-            </p>
-          </td>
-          <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-            <div class="flex items-center space-x-3.5">
-              <button class="edit-btn hover:text-primary" data-folio="${guest.room}">
-                Edit
-              </button>
-            </div>
-          </td>
-        `;
-        
-        tableBody.appendChild(row);
-      });
-    }
-    
-    // Fungsi untuk memperbarui tombol pagination
-    function generatePagination() {
-      const paginationContainer = document.getElementById('pagination');
-      paginationContainer.innerHTML = '';  // Clear existing pagination
-      
-      // Tombol Prev
-      const prevButton = document.createElement('li');
-      prevButton.classList.add('page-item');
-      prevButton.innerHTML = `<a class="page-link" href="#" data-action="prev">Prev</a>`;
-      paginationContainer.appendChild(prevButton);
-      
-      // Tombol Angka
-      for (let i = 1; i <= totalPages; i++) {
-        const pageItem = document.createElement('li');
-        pageItem.classList.add('page-item');
-        const isActive = startIndex / limit + 1 === i;  // Cek jika halaman ini aktif
-        pageItem.innerHTML = `
-          <a class="page-link ${isActive ? 'active' : ''}" href="#" data-action="page" data-page="${i}">
-            ${i}
-          </a>`;
-        paginationContainer.appendChild(pageItem);
-      }
-    
-      // Tombol Next
-      const nextButton = document.createElement('li');
-      nextButton.classList.add('page-item');
-      nextButton.innerHTML = `<a class="page-link" href="#" data-action="next">Next</a>`;
-      paginationContainer.appendChild(nextButton);
-    
-      // Menambahkan event listener pada tombol-tombol pagination
-      document.querySelectorAll('.page-link').forEach(link => {
-        link.addEventListener('click', (event) => {
-          const action = event.target.getAttribute('data-action');
-          if (action === 'prev') {
-            changePage('prev');
-          } else if (action === 'next') {
-            changePage('next');
-          } else if (action === 'page') {
-            const page = parseInt(event.target.getAttribute('data-page'));
-            changePage(page);
-          }
-        });
-      });
-    }
-    
-    // Fungsi untuk menangani perubahan halaman
-    function changePage(page) {
-      if (page === 'prev' && startIndex > 0) {
-        startIndex -= limit;
-      } else if (page === 'next' && startIndex + limit < Object.keys(guests).length) {
-        startIndex += limit;
-      } else if (typeof page === 'number') {
-        startIndex = (page - 1) * limit;
-      }
-      displayGuests();
-      generatePagination();
-    }
-    
-    // Panggil fungsi untuk mendapatkan data saat halaman dimuat
-    window.onload = getGuests;
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+  import { getDatabase, ref, get, set, update } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
   
-    document.addEventListener('click', (event) => {
-      if (event.target.classList.contains('edit-btn')) {
-        const folio = event.target.getAttribute('data-folio');
-        
-        // Cek apakah folio ada dalam objek guests
-        const guest = guests[folio];
-        
-        // Pastikan guest ditemukan
-        if (guest) {
-          // Menampilkan modal
-          document.getElementById('edit-modal').classList.remove('hidden');
-          
-          // Menampilkan data tamu di modal
-          document.getElementById('guest-name').textContent = guest.fname;
-          document.getElementById('guest-room').textContent = guest.room;
-          document.getElementById('guest-checkin').textContent = guest.dateci;
-          document.getElementById('guest-checkout').textContent = guest.dateco;
-          
-          // Menyimpan folio untuk proses update
-          document.getElementById('update-guest-form').setAttribute('data-folio', folio);
-        } else {
-          console.error('Guest with folio ' + folio + ' not found.');
-        }
+  // Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDRx8YRkKK3ZmLjhZdhyqlvW7ey7A6Fhyk",
+    authDomain: "dafamhospitalitytv.firebaseapp.com",
+    databaseURL: "https://dafamhospitalitytv-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "dafamhospitalitytv",
+    storageBucket: "dafamhospitalitytv.firebasestorage.app",
+    messagingSenderId: "880529592485",
+    appId: "1:880529592485:web:3d62d2ada4b7036bb07d4c",
+    measurementId: "G-402MDJFVR5"
+  };
+  
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  
+  // Reference to 'FOGUEST' node
+  const guestRef = ref(db, 'FOGUEST');
+  
+  // Variabel untuk menyimpan data tamu dan posisi data
+  let guests = {};
+  let startIndex = 0;
+  const limit = 10;  // Jumlah data per halaman
+  let totalPages = 0;
+  
+  // Fungsi untuk mengambil data tamu dari Firebase
+  async function getGuests() {
+    try {
+      const snapshot = await get(guestRef);
+      if (snapshot.exists()) {
+        guests = snapshot.val();
+        totalPages = Math.ceil(Object.keys(guests).length / limit);
+        displayGuests();
+        generatePagination();
+      } else {
+        console.log("No data available");
       }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
+  
+  // Fungsi untuk menampilkan data tamu
+  function displayGuests() {
+    const tableBody = document.getElementById('table-body');
+    
+    // Kosongkan data lama
+    tableBody.innerHTML = '';
+  
+    // Ambil data sesuai dengan startIndex dan limit
+    const guestsToShow = Object.values(guests).slice(startIndex, startIndex + limit);
+  
+    // Loop dan tambahkan baris ke tabel
+    guestsToShow.forEach(guest => {
+      const row = document.createElement('tr');
+      
+      // Tentukan status berdasarkan nilai foliostatus (hapus spasi ekstra dengan .trim())
+      let statusLabel = '';
+      let statusClass = '';
+      const status = guest.foliostatus.trim();  // Menghapus spasi ekstra
+  
+      switch (status) {
+        case 'T':
+          statusLabel = 'Tentative';
+          statusClass = 'inline-flex rounded-full bg-warning bg-opacity-10 px-3 py-1 text-sm font-medium text-warning';
+          break;
+        case 'O':
+          statusLabel = 'Check-out';
+          statusClass = 'inline-flex rounded-full bg-danger bg-opacity-10 px-3 py-1 text-sm font-medium text-danger';
+          break;
+        case 'I':
+          statusLabel = 'In-house';
+          statusClass = 'inline-flex rounded-full bg-success bg-opacity-10 px-3 py-1 text-sm font-medium text-success';
+          break;
+        case 'C':
+          statusLabel = 'Confirmed';
+          statusClass = 'inline-flex rounded-full bg-secondary bg-opacity-10 px-3 py-1 text-sm font-medium text-secondary';
+          break;
+        case 'X':
+          statusLabel = 'Cancelled';
+          statusClass = 'inline-flex rounded-full bg-info bg-opacity-10 px-3 py-1 text-sm font-medium text-info';
+          break;
+        case 'G':
+          statusLabel = 'Guaranteed';
+          statusClass = 'inline-flex rounded-full bg-primary bg-opacity-10 px-3 py-1 text-sm font-medium text-primary';
+          break;
+        default:
+          statusLabel = 'Unknown';
+          statusClass = 'bg-gray-300 text-black dark:text-white';
+      }
+  
+      row.innerHTML = `
+        <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
+          <h5 class="font-medium text-black dark:text-white">${guest.fname}</h5>
+          <p class="text-sm">${guest.room}</p>
+        </td>
+        <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+          <h5 class="font-medium text-black dark:text-white">${guest.dateci}</h5>
+          <p class="text-sm">${guest.dateco}</p>
+        </td>
+        <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+          <p class="inline-flex rounded-full ${statusClass} bg-opacity-10 px-3 py-1 text-sm font-medium">
+            ${statusLabel}
+          </p>
+        </td>
+        <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+          <div class="flex items-center space-x-3.5">
+            <button class="edit-btn hover:text-primary" data-folio="${guest.room}">
+              Edit
+            </button>
+          </div>
+        </td>
+      `;
+      
+      tableBody.appendChild(row);
     });
-
+  }
   
+  // Fungsi untuk memperbarui tombol pagination
+  function generatePagination() {
+    const paginationContainer = document.getElementById('pagination');
+    paginationContainer.innerHTML = '';  // Clear existing pagination
+    
+    // Tombol Prev
+    const prevButton = document.createElement('li');
+    prevButton.classList.add('page-item');
+    prevButton.innerHTML = `<a class="page-link" href="#" data-action="prev">Prev</a>`;
+    paginationContainer.appendChild(prevButton);
+    
+    // Tombol Angka
+    for (let i = 1; i <= totalPages; i++) {
+      const pageItem = document.createElement('li');
+      pageItem.classList.add('page-item');
+      const isActive = startIndex / limit + 1 === i;  // Cek jika halaman ini aktif
+      pageItem.innerHTML = `
+        <a class="page-link ${isActive ? 'active' : ''}" href="#" data-action="page" data-page="${i}">
+          ${i}
+        </a>`;
+      paginationContainer.appendChild(pageItem);
+    }
+  
+    // Tombol Next
+    const nextButton = document.createElement('li');
+    nextButton.classList.add('page-item');
+    nextButton.innerHTML = `<a class="page-link" href="#" data-action="next">Next</a>`;
+    paginationContainer.appendChild(nextButton);
+  
+    // Menambahkan event listener pada tombol-tombol pagination
+    document.querySelectorAll('.page-link').forEach(link => {
+      link.addEventListener('click', (event) => {
+        const action = event.target.getAttribute('data-action');
+        if (action === 'prev') {
+          changePage('prev');
+        } else if (action === 'next') {
+          changePage('next');
+        } else if (action === 'page') {
+          const page = parseInt(event.target.getAttribute('data-page'));
+          changePage(page);
+        }
+      });
+    });
+  }
+  
+  // Fungsi untuk menangani perubahan halaman
+  function changePage(page) {
+    if (page === 'prev' && startIndex > 0) {
+      startIndex -= limit;
+    } else if (page === 'next' && startIndex + limit < Object.keys(guests).length) {
+      startIndex += limit;
+    } else if (typeof page === 'number') {
+      startIndex = (page - 1) * limit;
+    }
+    displayGuests();
+    generatePagination();
+  }
+  
+  // Panggil fungsi untuk mendapatkan data saat halaman dimuat
+  window.onload = getGuests;
+
+  document.addEventListener('click', (event) => {
+    if (event.target.classList.contains('edit-btn')) {
+      const folio = event.target.getAttribute('data-folio');
+      
+      // Cek apakah folio ada dalam objek guests
+      const guest = guests[folio];
+      
+      // Pastikan guest ditemukan
+      if (guest) {
+        // Menampilkan modal
+        document.getElementById('edit-modal').classList.remove('hidden');
+        
+        // Menampilkan data tamu di modal
+        document.getElementById('guest-name').textContent = guest.fname;
+        document.getElementById('guest-room').textContent = guest.room;
+        document.getElementById('guest-checkin').textContent = guest.dateci;
+        document.getElementById('guest-checkout').textContent = guest.dateco;
+        
+        // Menyimpan folio untuk proses update
+        document.getElementById('update-guest-form').setAttribute('data-folio', folio);
+      } else {
+        console.error('Guest with folio ' + folio + ' not found.');
+      }
+    }
+  });
+
     // Menutup modal ketika klik tombol close
     document.getElementById('close-modal').addEventListener('click', () => {
       document.getElementById('edit-modal').classList.add('hidden');
     });
-  
+
     document.getElementById('update-guest-form').addEventListener('submit', async (event) => {
-      event.preventDefault();
-      
-      const folio = event.target.getAttribute('data-folio');
-      const updatedGuest = { ...guests[folio] };  // Menyalin data tamu sebelum update
-      
-      const fileInput = document.querySelector('#edit-photo');
-      let imageUrl = null;
+    event.preventDefault();
+    
+    const folio = event.target.getAttribute('data-folio');
+    const updatedGuest = { ...guests[folio] };  // Menyalin data tamu sebelum update
+    
+    const fileInput = document.querySelector('#edit-photo');
+    let imageUrl = null;
 
-      // Jika ada file gambar yang dipilih
-      if (fileInput.files && fileInput.files[0]) {
-        const file = fileInput.files[0];
-        const formData = new FormData();
-        formData.append('image', file);
-
-        try {
-          // Kirim file ke server PHP untuk di-upload
-          const response = await fetch('upload.php', {
-            method: 'POST',
-            body: formData
-          });
-          
-          const result = await response.json();
-          if (result.success) {
-            // Gambar berhasil di-upload, simpan URL-nya
-            imageUrl = result.imageUrl;
-            updatedGuest.photoUrl = imageUrl;
-          } else {
-            alert(result.message || 'Upload gambar gagal!');
-            return;
-          }
-        } catch (error) {
-          console.error("Error uploading image:", error);
-          alert("Gagal meng-upload gambar.");
-          return;
-        }
-      }
+    // Jika ada file gambar yang dipilih
+    if (fileInput.files && fileInput.files[0]) {
+      const file = fileInput.files[0];
+      const formData = new FormData();
+      formData.append('image', file);
 
       try {
-        // Update data di Firebase
-        await updateGuestInFirebase(folio, updatedGuest);
+        // Kirim file ke server PHP untuk di-upload
+        const response = await fetch('upload.php', {
+          method: 'POST',
+          body: formData
+        });
         
-        // Update data tamu di lokal array
-        guests[folio] = updatedGuest;
-        
-        // Update tampilan tabel
-        displayGuests();
-        
-        // Tutup form edit setelah update
-        document.getElementById('edit-modal').classList.add('hidden');
+        const result = await response.json();
+        if (result.success) {
+          // Gambar berhasil di-upload, simpan URL-nya
+          imageUrl = result.imageUrl;
+          updatedGuest.photoUrl = imageUrl;
+          
+          // Update the image URL under GUESTIMAGE/{folio}/imageUrl
+          await set(ref(db, `GUESTIMAGE/${folio}/imageUrl`), imageUrl);
+        } else {
+          alert(result.message || 'Upload gambar gagal!');
+          return;
+        }
       } catch (error) {
-        console.error("Error updating guest:", error);
+        console.error("Error uploading image:", error);
+        alert("Gagal meng-upload gambar.");
+        return;
       }
-    });
-  
-    // Fungsi untuk mengupdate data tamu di Firebase
-    async function updateGuestInFirebase(folio, updatedGuest) {
-      const guestRef = ref(db, `FOGUEST/${folio}`);
-      await set(guestRef, updatedGuest);
     }
-  </script>  
+
+    // Setelah gambar berhasil diupload, Anda bisa menutup modal dan memperbarui tampilan tabel jika perlu
+    displayGuests();
+    document.getElementById('edit-modal').classList.add('hidden');
+  });
+</script>
   
   <!-- HTML untuk Menampilkan Tabel dan Form Edit -->
   <div
