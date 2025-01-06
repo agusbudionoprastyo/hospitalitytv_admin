@@ -301,8 +301,7 @@
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
-
-  // Reference to the 'NOTIFICATIONS' node (root level)
+    // Reference to the 'NOTIFICATIONS' node (root level)
   const notificationsRef = ref(db, 'NOTIFICATIONS');  // This will fetch all notification categories
 
   // Fetch and listen for notification changes
@@ -341,32 +340,32 @@
       }
 
       // Build the HTML content for the notifications
-      let notificationsHTML = '';
-      notifications.forEach(notification => {
-          // Format timestamp into human-readable format
-          const formattedDate = new Date(notification.timestamp).toLocaleString();
+          let notificationsHTML = '';
+          notifications.forEach(notification => {
+              // Format timestamp into human-readable format
+              const formattedDate = new Date(notification.timestamp).toLocaleString();
 
-          // Create HTML for each notification
-          notificationsHTML += `
-              <li>
-                <a
-                  class="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-                  href="#"
-                >
-                  <p class="text-sm">
-                    <span class="text-black dark:text-white">${notification.title}</span>
-                    ${notification.message}
-                  </p>
-                  <p class="text-xs">${formattedDate}</p>
-                </a>
-              </li>
-          `;
-      });
+              // Create HTML for each notification
+              notificationsHTML += `
+                  <li>
+                    <a
+                      class="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
+                      href="#"
+                    >
+                      <p class="text-sm">
+                        <span class="text-black dark:text-white">${notification.title}</span>
+                        ${notification.message}
+                      </p>
+                      <p class="text-xs">${formattedDate}</p>
+                    </a>
+                  </li>
+              `;
+          });
 
       // Set the innerHTML of the notifications list
       notificationsList.innerHTML = notificationsHTML;
-  }
-</script>
+    }
+  </script>
 <header
   class="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none"
 >

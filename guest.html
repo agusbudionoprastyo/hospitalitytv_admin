@@ -301,8 +301,7 @@
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
-
-  // Reference to the 'NOTIFICATIONS' node (root level)
+    // Reference to the 'NOTIFICATIONS' node (root level)
   const notificationsRef = ref(db, 'NOTIFICATIONS');  // This will fetch all notification categories
 
   // Fetch and listen for notification changes
@@ -341,32 +340,32 @@
       }
 
       // Build the HTML content for the notifications
-      let notificationsHTML = '';
-      notifications.forEach(notification => {
-          // Format timestamp into human-readable format
-          const formattedDate = new Date(notification.timestamp).toLocaleString();
+          let notificationsHTML = '';
+          notifications.forEach(notification => {
+              // Format timestamp into human-readable format
+              const formattedDate = new Date(notification.timestamp).toLocaleString();
 
-          // Create HTML for each notification
-          notificationsHTML += `
-              <li>
-                <a
-                  class="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
-                  href="#"
-                >
-                  <p class="text-sm">
-                    <span class="text-black dark:text-white">${notification.title}</span>
-                    ${notification.message}
-                  </p>
-                  <p class="text-xs">${formattedDate}</p>
-                </a>
-              </li>
-          `;
-      });
+              // Create HTML for each notification
+              notificationsHTML += `
+                  <li>
+                    <a
+                      class="flex flex-col gap-2.5 border-t border-stroke px-4.5 py-3 hover:bg-gray-2 dark:border-strokedark dark:hover:bg-meta-4"
+                      href="#"
+                    >
+                      <p class="text-sm">
+                        <span class="text-black dark:text-white">${notification.title}</span>
+                        ${notification.message}
+                      </p>
+                      <p class="text-xs">${formattedDate}</p>
+                    </a>
+                  </li>
+              `;
+          });
 
       // Set the innerHTML of the notifications list
       notificationsList.innerHTML = notificationsHTML;
-  }
-</script>
+    }
+  </script>
 <header
   class="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none"
 >
@@ -687,35 +686,6 @@
 
         <!-- ===== Main Content Start ===== -->
         <main>
-          <!-- Toast Success -->
-          <div id="error-toast" class="toast hidden fixed bottom-5 right-5 w-full max-w-[400px] border-l-6 bg-[#34D399] bg-opacity-[15%] px-7 py-8 shadow-md dark:bg-[#1B1B24] dark:bg-opacity-30 md:p-9">
-            <div class="mr-5 flex h-9 w-[36px] items-center justify-center rounded-lg bg-[#34D399]">
-              <!-- Icon -->
-              <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.2984 0.826822L15.2868 0.811827L15.2741 0.797751C14.9173 0.401867 14.3238 0.400754 13.9657 0.794406L5.91888 9.45376L2.05667 5.2868C1.69856 4.89287 1.10487 4.89389 0.747996 5.28987C0.417335 5.65675 0.417335 6.22337 0.747996 6.59026L0.747959 6.59029L0.752701 6.59541L4.86742 11.0348C5.14445 11.3405 5.52858 11.5 5.89581 11.5C6.29242 11.5 6.65178 11.3355 6.92401 11.035L15.2162 2.11161C15.5833 1.74452 15.576 1.18615 15.2984 0.826822Z" fill="white" stroke="white"></path>
-              </svg>
-            </div>
-            <div class="w-full">
-              <h5 id="toast-title-success" class="mb-3 text-lg font-bold text-black dark:text-[#34D399]">Guest profile update Successfully</h5>
-              <p id="toast-message-success" class="text-base leading-relaxed text-body">Picture has been upload</p>
-            </div>
-          </div>
-
-          <!-- Toast Error (similar structure) -->
-          <div id="success-toast" class="toast hidden fixed bottom-5 right-5 w-full max-w-[400px] border-l-6 bg-red-500 bg-opacity-[15%] px-7 py-8 shadow-md dark:bg-[#1B1B24] dark:bg-opacity-30 md:p-9">
-            <div class="mr-5 flex h-9 w-[36px] items-center justify-center rounded-lg bg-red-500">
-              <!-- Icon (cross) -->
-              <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.2984 0.826822L15.2868 0.811827L15.2741 0.797751C14.9173 0.401867 14.3238 0.400754 13.9657 0.794406L5.91888 9.45376L2.05667 5.2868C1.69856 4.89287 1.10487 4.89389 0.747996 5.28987C0.417335 5.65675 0.417335 6.22337 0.747996 6.59026L0.747959 6.59029L0.752701 6.59541L4.86742 11.0348C5.14445 11.3405 5.52858 11.5 5.89581 11.5C6.29242 11.5 6.65178 11.3355 6.92401 11.035L15.2162 2.11161C15.5833 1.74452 15.576 1.18615 15.2984 0.826822Z" fill="white" stroke="white"></path>
-              </svg>
-            </div>
-            <div class="w-full">
-              <h5 id="toast-title-error" class="mb-3 text-lg font-bold text-black dark:text-[#FF4B4B]">Error Occurred</h5>
-              <p id="toast-message-error" class="text-base leading-relaxed text-body">An error occurred during the process.</p>
-            </div>
-          </div>
-
-
           <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
             <!-- Breadcrumb Start -->
             <div
@@ -738,323 +708,301 @@
 
             <!-- ====== Table Section Start -->
             <div class="flex flex-col gap-10">
-              <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-  import { getDatabase, ref, get, set, update } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
-  
-  // Firebase configuration
-  const firebaseConfig = {
-    apiKey: "AIzaSyDRx8YRkKK3ZmLjhZdhyqlvW7ey7A6Fhyk",
-    authDomain: "dafamhospitalitytv.firebaseapp.com",
-    databaseURL: "https://dafamhospitalitytv-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "dafamhospitalitytv",
-    storageBucket: "dafamhospitalitytv.firebasestorage.app",
-    messagingSenderId: "880529592485",
-    appId: "1:880529592485:web:3d62d2ada4b7036bb07d4c",
-    measurementId: "G-402MDJFVR5"
-  };
-  
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-  
-  // Reference to 'FOGUEST' node
-  const guestRef = ref(db, 'FOGUEST');
-  
-  // Variabel untuk menyimpan data tamu dan posisi data
-  let guests = {};
-  let startIndex = 0;
-  const limit = 10;  // Jumlah data per halaman
-  let totalPages = 0;
-  
-  // Fungsi untuk mengambil data tamu dari Firebase
-  async function getGuests() {
-    try {
-      const snapshot = await get(guestRef);
-      if (snapshot.exists()) {
-        guests = snapshot.val();
-        totalPages = Math.ceil(Object.keys(guests).length / limit);
+                  <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+      import { getDatabase, ref, get, set, update } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+      
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDRx8YRkKK3ZmLjhZdhyqlvW7ey7A6Fhyk",
+        authDomain: "dafamhospitalitytv.firebaseapp.com",
+        databaseURL: "https://dafamhospitalitytv-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "dafamhospitalitytv",
+        storageBucket: "dafamhospitalitytv.firebasestorage.app",
+        messagingSenderId: "880529592485",
+        appId: "1:880529592485:web:3d62d2ada4b7036bb07d4c",
+        measurementId: "G-402MDJFVR5"
+      };
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+      
+      // Reference to 'FOGUEST' node
+      const guestRef = ref(db, 'FOGUEST');
+      
+      // Variabel untuk menyimpan data tamu dan posisi data
+      let guests = {};
+      let startIndex = 0;
+      const limit = 10;  // Jumlah data per halaman
+      let totalPages = 0;
+      
+      // Fungsi untuk mengambil data tamu dari Firebase
+      async function getGuests() {
+        try {
+          const snapshot = await get(guestRef);
+          if (snapshot.exists()) {
+            guests = snapshot.val();
+            totalPages = Math.ceil(Object.keys(guests).length / limit);
+            displayGuests();
+            generatePagination();
+          } else {
+            console.log("No data available");
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+      
+      // Fungsi untuk menampilkan data tamu
+      function displayGuests() {
+        const tableBody = document.getElementById('table-body');
+        
+        // Kosongkan data lama
+        tableBody.innerHTML = '';
+      
+        // Ambil data sesuai dengan startIndex dan limit
+        const guestsToShow = Object.values(guests).slice(startIndex, startIndex + limit);
+      
+        // Loop dan tambahkan baris ke tabel
+        guestsToShow.forEach(guest => {
+          const row = document.createElement('tr');
+          
+          // Tentukan status berdasarkan nilai foliostatus (hapus spasi ekstra dengan .trim())
+          let statusLabel = '';
+          let statusClass = '';
+          const status = guest.foliostatus.trim();  // Menghapus spasi ekstra
+      
+          switch (status) {
+            case 'T':
+              statusLabel = 'Tentative';
+              statusClass = 'inline-flex rounded-full bg-warning bg-opacity-10 px-3 py-1 text-sm font-medium text-warning';
+              break;
+            case 'O':
+              statusLabel = 'Check-out';
+              statusClass = 'inline-flex rounded-full bg-danger bg-opacity-10 px-3 py-1 text-sm font-medium text-danger';
+              break;
+            case 'I':
+              statusLabel = 'In-house';
+              statusClass = 'inline-flex rounded-full bg-success bg-opacity-10 px-3 py-1 text-sm font-medium text-success';
+              break;
+            case 'C':
+              statusLabel = 'Confirmed';
+              statusClass = 'inline-flex rounded-full bg-secondary bg-opacity-10 px-3 py-1 text-sm font-medium text-secondary';
+              break;
+            case 'X':
+              statusLabel = 'Cancelled';
+              statusClass = 'inline-flex rounded-full bg-info bg-opacity-10 px-3 py-1 text-sm font-medium text-info';
+              break;
+            case 'G':
+              statusLabel = 'Guaranteed';
+              statusClass = 'inline-flex rounded-full bg-primary bg-opacity-10 px-3 py-1 text-sm font-medium text-primary';
+              break;
+            default:
+              statusLabel = 'Unknown';
+              statusClass = 'bg-gray-300 text-black dark:text-white';
+          }
+      
+          row.innerHTML = `
+            <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
+              <h5 class="font-medium text-black dark:text-white">${guest.fname}</h5>
+              <p class="text-sm">${guest.room}</p>
+            </td>
+            <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+              <h5 class="font-medium text-black dark:text-white">${guest.dateci}</h5>
+              <p class="text-sm">${guest.dateco}</p>
+            </td>
+            <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+              <p class="inline-flex rounded-full ${statusClass} bg-opacity-10 px-3 py-1 text-sm font-medium">
+                ${statusLabel}
+              </p>
+            </td>
+          <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+            <div class="flex items-center space-x-3.5">
+              <button class="edit-btn hover:text-primary" data-folio="${guest.room}">
+                <!-- Ikon SVG Kamera -->
+                Add
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 7a1 1 0 011-1h3.28a3 3 0 015.44 0H18a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V7z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 11a3 3 0 100 6 3 3 0 000-6z"></path>
+                </svg>
+              </button>
+            </div>
+          </td>
+
+          `;
+          
+          tableBody.appendChild(row);
+        });
+      }
+      
+      // Fungsi untuk memperbarui tombol pagination
+      function generatePagination() {
+        const paginationContainer = document.getElementById('pagination');
+        paginationContainer.innerHTML = '';  // Clear existing pagination
+        
+        // Tombol Prev
+        const prevButton = document.createElement('li');
+        prevButton.classList.add('page-item');
+        prevButton.innerHTML = `<a class="page-link" href="#" data-action="prev">Prev</a>`;
+        paginationContainer.appendChild(prevButton);
+        
+        // Tombol Angka
+        for (let i = 1; i <= totalPages; i++) {
+          const pageItem = document.createElement('li');
+          pageItem.classList.add('page-item');
+          const isActive = startIndex / limit + 1 === i;  // Cek jika halaman ini aktif
+          pageItem.innerHTML = `
+            <a class="page-link ${isActive ? 'active' : ''}" href="#" data-action="page" data-page="${i}">
+              ${i}
+            </a>`;
+          paginationContainer.appendChild(pageItem);
+        }
+      
+        // Tombol Next
+        const nextButton = document.createElement('li');
+        nextButton.classList.add('page-item');
+        nextButton.innerHTML = `<a class="page-link" href="#" data-action="next">Next</a>`;
+        paginationContainer.appendChild(nextButton);
+      
+        // Menambahkan event listener pada tombol-tombol pagination
+        document.querySelectorAll('.page-link').forEach(link => {
+          link.addEventListener('click', (event) => {
+            const action = event.target.getAttribute('data-action');
+            if (action === 'prev') {
+              changePage('prev');
+            } else if (action === 'next') {
+              changePage('next');
+            } else if (action === 'page') {
+              const page = parseInt(event.target.getAttribute('data-page'));
+              changePage(page);
+            }
+          });
+        });
+      }
+      
+      // Fungsi untuk menangani perubahan halaman
+      function changePage(page) {
+        if (page === 'prev' && startIndex > 0) {
+          startIndex -= limit;
+        } else if (page === 'next' && startIndex + limit < Object.keys(guests).length) {
+          startIndex += limit;
+        } else if (typeof page === 'number') {
+          startIndex = (page - 1) * limit;
+        }
         displayGuests();
         generatePagination();
-      } else {
-        console.log("No data available");
       }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }
-  
-  // Fungsi untuk menampilkan data tamu
-  function displayGuests() {
-    const tableBody = document.getElementById('table-body');
-    
-    // Kosongkan data lama
-    tableBody.innerHTML = '';
-  
-    // Ambil data sesuai dengan startIndex dan limit
-    const guestsToShow = Object.values(guests).slice(startIndex, startIndex + limit);
-  
-    // Loop dan tambahkan baris ke tabel
-    guestsToShow.forEach(guest => {
-      const row = document.createElement('tr');
       
-      // Tentukan status berdasarkan nilai foliostatus (hapus spasi ekstra dengan .trim())
-      let statusLabel = '';
-      let statusClass = '';
-      const status = guest.foliostatus.trim();  // Menghapus spasi ekstra
-  
-      switch (status) {
-        case 'T':
-          statusLabel = 'Tentative';
-          statusClass = 'inline-flex rounded-full bg-warning bg-opacity-10 px-3 py-1 text-sm font-medium text-warning';
-          break;
-        case 'O':
-          statusLabel = 'Check-out';
-          statusClass = 'inline-flex rounded-full bg-danger bg-opacity-10 px-3 py-1 text-sm font-medium text-danger';
-          break;
-        case 'I':
-          statusLabel = 'In-house';
-          statusClass = 'inline-flex rounded-full bg-success bg-opacity-10 px-3 py-1 text-sm font-medium text-success';
-          break;
-        case 'C':
-          statusLabel = 'Confirmed';
-          statusClass = 'inline-flex rounded-full bg-secondary bg-opacity-10 px-3 py-1 text-sm font-medium text-secondary';
-          break;
-        case 'X':
-          statusLabel = 'Cancelled';
-          statusClass = 'inline-flex rounded-full bg-info bg-opacity-10 px-3 py-1 text-sm font-medium text-info';
-          break;
-        case 'G':
-          statusLabel = 'Guaranteed';
-          statusClass = 'inline-flex rounded-full bg-primary bg-opacity-10 px-3 py-1 text-sm font-medium text-primary';
-          break;
-        default:
-          statusLabel = 'Unknown';
-          statusClass = 'bg-gray-300 text-black dark:text-white';
-      }
-  
-      row.innerHTML = `
-        <td class="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
-          <h5 class="font-medium text-black dark:text-white">${guest.fname}</h5>
-          <p class="text-sm">${guest.room}</p>
-        </td>
-        <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-          <h5 class="font-medium text-black dark:text-white">${guest.dateci}</h5>
-          <p class="text-sm">${guest.dateco}</p>
-        </td>
-        <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-          <p class="inline-flex rounded-full ${statusClass} bg-opacity-10 px-3 py-1 text-sm font-medium">
-            ${statusLabel}
-          </p>
-        </td>
-      <td class="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
-        <div class="flex items-center space-x-3.5">
-          <button class="edit-btn hover:text-primary" data-folio="${guest.room}">
-            <!-- Ikon SVG Kamera -->
-            Add
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 7a1 1 0 011-1h3.28a3 3 0 015.44 0H18a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V7z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 11a3 3 0 100 6 3 3 0 000-6z"></path>
-            </svg>
-          </button>
-        </div>
-      </td>
+      // Panggil fungsi untuk mendapatkan data saat halaman dimuat
+      window.onload = getGuests;
 
-      `;
-      
-      tableBody.appendChild(row);
-    });
-  }
-  
-  // Fungsi untuk memperbarui tombol pagination
-  function generatePagination() {
-    const paginationContainer = document.getElementById('pagination');
-    paginationContainer.innerHTML = '';  // Clear existing pagination
-    
-    // Tombol Prev
-    const prevButton = document.createElement('li');
-    prevButton.classList.add('page-item');
-    prevButton.innerHTML = `<a class="page-link" href="#" data-action="prev">Prev</a>`;
-    paginationContainer.appendChild(prevButton);
-    
-    // Tombol Angka
-    for (let i = 1; i <= totalPages; i++) {
-      const pageItem = document.createElement('li');
-      pageItem.classList.add('page-item');
-      const isActive = startIndex / limit + 1 === i;  // Cek jika halaman ini aktif
-      pageItem.innerHTML = `
-        <a class="page-link ${isActive ? 'active' : ''}" href="#" data-action="page" data-page="${i}">
-          ${i}
-        </a>`;
-      paginationContainer.appendChild(pageItem);
-    }
-  
-    // Tombol Next
-    const nextButton = document.createElement('li');
-    nextButton.classList.add('page-item');
-    nextButton.innerHTML = `<a class="page-link" href="#" data-action="next">Next</a>`;
-    paginationContainer.appendChild(nextButton);
-  
-    // Menambahkan event listener pada tombol-tombol pagination
-    document.querySelectorAll('.page-link').forEach(link => {
-      link.addEventListener('click', (event) => {
-        const action = event.target.getAttribute('data-action');
-        if (action === 'prev') {
-          changePage('prev');
-        } else if (action === 'next') {
-          changePage('next');
-        } else if (action === 'page') {
-          const page = parseInt(event.target.getAttribute('data-page'));
-          changePage(page);
+    // Fungsi untuk mendapatkan URL gambar dari Firebase berdasarkan folio
+    async function loadGuestImage(folio) {
+      try {
+        const imageRef = ref(db, `GUESTIMAGE/${folio}/imageUrl`);
+        const snapshot = await get(imageRef);
+
+        if (snapshot.exists()) {
+          const imageUrl = snapshot.val(); // Mendapatkan URL gambar
+          // Memperbarui src gambar pada form dengan URL gambar yang diambil dari Firebase
+          document.querySelector('#update-guest-form img').src = imageUrl;
+        } else {
+          console.log("Image not found in Firebase, showing default image.");
+          // Jika gambar tidak ditemukan, tampilkan gambar default
+          document.querySelector('#update-guest-form img').src = 'https://placehold.co/960x1080';  // Ganti dengan path gambar default Anda
         }
-      });
-    });
-  }
-  
-  // Fungsi untuk menangani perubahan halaman
-  function changePage(page) {
-    if (page === 'prev' && startIndex > 0) {
-      startIndex -= limit;
-    } else if (page === 'next' && startIndex + limit < Object.keys(guests).length) {
-      startIndex += limit;
-    } else if (typeof page === 'number') {
-      startIndex = (page - 1) * limit;
-    }
-    displayGuests();
-    generatePagination();
-  }
-  
-  // Panggil fungsi untuk mendapatkan data saat halaman dimuat
-  window.onload = getGuests;
-
-// Fungsi untuk mendapatkan URL gambar dari Firebase berdasarkan folio
-async function loadGuestImage(folio) {
-  try {
-    const imageRef = ref(db, `GUESTIMAGE/${folio}/imageUrl`);
-    const snapshot = await get(imageRef);
-
-    if (snapshot.exists()) {
-      const imageUrl = snapshot.val(); // Mendapatkan URL gambar
-      // Memperbarui src gambar pada form dengan URL gambar yang diambil dari Firebase
-      document.querySelector('#update-guest-form img').src = imageUrl;
-    } else {
-      console.log("Image not found in Firebase, showing default image.");
-      // Jika gambar tidak ditemukan, tampilkan gambar default
-      document.querySelector('#update-guest-form img').src = 'https://placehold.co/960x1080';  // Ganti dengan path gambar default Anda
-    }
-  } catch (error) {
-    console.error("Error fetching image URL:", error);
-    // Tampilkan gambar default jika terjadi error
-    document.querySelector('#update-guest-form img').src = 'https://placehold.co/960x1080';
-  }
-}
-
-// Menangani klik tombol edit pada baris tabel
-document.addEventListener('click', (event) => {
-  if (event.target.classList.contains('edit-btn')) {
-    const folio = event.target.getAttribute('data-folio');  // Ambil folio dari data-folio tombol edit
-
-    // Pastikan folio ditemukan dan valid
-    if (folio) {
-      // Memuat data tamu berdasarkan folio
-      const guest = guests[folio];  // Ambil data tamu berdasarkan folio dari objek guests
-
-      if (guest) {
-        // Tampilkan modal dan data tamu di modal
-        document.getElementById('edit-modal').classList.remove('hidden');
-        
-        document.getElementById('guest-name').textContent = guest.fname;
-        document.getElementById('guest-room').textContent = guest.room;
-        document.getElementById('guest-folio').textContent = guest.folio;
-
-        // Set folio di form untuk memproses update nanti
-        document.getElementById('update-guest-form').setAttribute('data-folio', guest.folio);
-        
-        // Muat gambar tamu berdasarkan folio yang dipilih
-        loadGuestImage(guest.folio);  // Panggil fungsi untuk memuat gambar berdasarkan folio
+      } catch (error) {
+        console.error("Error fetching image URL:", error);
+        // Tampilkan gambar default jika terjadi error
+        document.querySelector('#update-guest-form img').src = 'https://placehold.co/960x1080';
       }
     }
-  }
-});
 
-// Menutup modal ketika klik tombol close
-document.getElementById('close-modal').addEventListener('click', () => {
-  document.getElementById('edit-modal').classList.add('hidden');
-});
+    // Menangani klik tombol edit pada baris tabel
+    document.addEventListener('click', (event) => {
+      if (event.target.classList.contains('edit-btn')) {
+        const folio = event.target.getAttribute('data-folio');  // Ambil folio dari data-folio tombol edit
 
+        // Pastikan folio ditemukan dan valid
+        if (folio) {
+          // Memuat data tamu berdasarkan folio
+          const guest = guests[folio];  // Ambil data tamu berdasarkan folio dari objek guests
 
-// Fungsi untuk menampilkan toast
-function showToast(message, type = 'success') {
-  // Pilih toast berdasarkan tipe (success atau error)
-  const toast = type === 'error' ? document.getElementById('error-toast') : document.getElementById('success-toast');
-  const toastMessage = toast.querySelector('.toast-message');
+          if (guest) {
+            // Tampilkan modal dan data tamu di modal
+            document.getElementById('edit-modal').classList.remove('hidden');
+            
+            document.getElementById('guest-name').textContent = guest.fname;
+            document.getElementById('guest-room').textContent = guest.room;
+            document.getElementById('guest-folio').textContent = guest.folio;
 
-  // Sesuaikan kelas berdasarkan tipe (success atau error)
-  toast.classList.remove('hidden');
-  toastMessage.textContent = message;
+            // Set folio di form untuk memproses update nanti
+            document.getElementById('update-guest-form').setAttribute('data-folio', guest.folio);
+            
+            // Muat gambar tamu berdasarkan folio yang dipilih
+            loadGuestImage(guest.folio);  // Panggil fungsi untuk memuat gambar berdasarkan folio
+          }
+        }
+      }
+    });
 
-  // Tampilkan toast
-  toast.classList.add('show');
+      // Menutup modal ketika klik tombol close
+      document.getElementById('close-modal').addEventListener('click', () => {
+      document.getElementById('edit-modal').classList.add('hidden');
+    });
 
-  // Sembunyikan toast setelah 3 detik
-  setTimeout(() => {
-    toast.classList.remove('show');
-    toast.classList.add('hidden');
-  }, 3000);
-}
+    document.getElementById('update-guest-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    
+    // Ambil folio langsung dari elemen modal
+    const folio = document.getElementById('guest-folio').textContent.trim();
+    const updatedGuest = { ...guests[folio] };  // Menyalin data tamu sebelum update
+    
+    const fileInput = document.querySelector('#edit-photo');
+    let imageUrl = null;
 
-document.getElementById('update-guest-form').addEventListener('submit', async (event) => {
-  event.preventDefault();
-  
-  // Ambil folio langsung dari elemen modal
-  const folio = document.getElementById('guest-folio').textContent.trim();
-  const updatedGuest = { ...guests[folio] };  // Menyalin data tamu sebelum update
-  
-  const fileInput = document.querySelector('#edit-photo');
-  let imageUrl = null;
+    // Jika ada file gambar yang dipilih
+    if (fileInput.files && fileInput.files[0]) {
+      const file = fileInput.files[0];
+      const formData = new FormData();
+      formData.append('image', file);
 
-  // Jika ada file gambar yang dipilih
-  if (fileInput.files && fileInput.files[0]) {
-    const file = fileInput.files[0];
-    const formData = new FormData();
-    formData.append('image', file);
+      try {
+        // Kirim file ke server PHP untuk di-upload
+        const response = await fetch('upload.php', {
+          method: 'POST',
+          body: formData
+        });
+        
+        const result = await response.json();
+        console.log("Upload Result:", result);
+        
+        if (result.success) {
+          imageUrl = result.imageUrl;
+          updatedGuest.photoUrl = imageUrl;
 
-    try {
-      // Kirim file ke server PHP untuk di-upload
-      const response = await fetch('upload.php', {
-        method: 'POST',
-        body: formData
-      });
-      
-      const result = await response.json();
-      console.log("Upload Result:", result);
-      
-      if (result.success) {
-        imageUrl = result.imageUrl;
-        updatedGuest.photoUrl = imageUrl;
+          console.log("Image URL to save in Firebase:", imageUrl);
 
-        console.log("Image URL to save in Firebase:", imageUrl);
+          await set(ref(db, `GUESTIMAGE/${folio}/imageUrl`), imageUrl);
 
-        await set(ref(db, `GUESTIMAGE/${folio}/imageUrl`), imageUrl);
-
-        showToast('Gambar berhasil di-upload dan data berhasil diperbarui!', 'success');
-      } else {
-        alert(result.message || 'Upload gambar gagal!');
+          // Menghilangkan toast
+          // showToast('Gambar berhasil di-upload dan data berhasil diperbarui!', 'success');
+        } else {
+          alert(result.message || 'Upload gambar gagal!');
+          return;
+        }
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        alert("Gagal meng-upload gambar.");
+        // showToast('Gagal meng-upload gambar.', 'error');
         return;
       }
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      alert("Gagal meng-upload gambar.");
-      showToast('Gagal meng-upload gambar.', 'error');
-      return;
     }
-  }
 
-  displayGuests();
-  document.getElementById('edit-modal').classList.add('hidden');
-});
-</script>
-  
+    displayGuests();
+    document.getElementById('edit-modal').classList.add('hidden');
+  });
+    </script>
     <div
       class="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1"
     >
