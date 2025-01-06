@@ -1156,10 +1156,59 @@ document.getElementById('close-modal').addEventListener('click', () => {
   document.getElementById('edit-modal').classList.add('hidden');
 });
 
+// document.getElementById('update-guest-form').addEventListener('submit', async (event) => {
+//   event.preventDefault();
+  
+//   const folio = event.target.getAttribute('data-folio');
+//   const updatedGuest = { ...guests[folio] };  // Menyalin data tamu sebelum update
+  
+//   const fileInput = document.querySelector('#edit-photo');
+//   let imageUrl = null;
+
+//   // Jika ada file gambar yang dipilih
+//   if (fileInput.files && fileInput.files[0]) {
+//     const file = fileInput.files[0];
+//     const formData = new FormData();
+//     formData.append('image', file);
+
+//     try {
+//       // Kirim file ke server PHP untuk di-upload
+//       const response = await fetch('upload.php', {
+//         method: 'POST',
+//         body: formData
+//       });
+      
+//       const result = await response.json();
+//       if (result.success) {
+//         // Gambar berhasil di-upload, simpan URL-nya
+//         imageUrl = result.imageUrl;
+//         updatedGuest.photoUrl = imageUrl;
+        
+//         // Update the image URL under GUESTIMAGE/{folio}/imageUrl
+//         await set(ref(db, `GUESTIMAGE/${folio}/imageUrl`), imageUrl);
+//       } else {
+//         alert(result.message || 'Upload gambar gagal!');
+//         return;
+//       }
+//     } catch (error) {
+//       console.error("Error uploading image:", error);
+//       alert("Gagal meng-upload gambar.");
+//       return;
+//     }
+//   }
+
+//   // Jika ada perubahan, perbarui data tamu di lokal
+//   guests[folio] = updatedGuest;
+
+//   // Setelah gambar berhasil diupload, Anda bisa menutup modal dan memperbarui tampilan tabel
+//   displayGuests(); // Memperbarui tampilan tabel
+//   document.getElementById('edit-modal').classList.add('hidden'); // Menutup modal
+// });
 document.getElementById('update-guest-form').addEventListener('submit', async (event) => {
   event.preventDefault();
   
-  const folio = event.target.getAttribute('data-folio');
+  // Ambil folio langsung dari elemen modal
+  const folio = document.getElementById('guest-folio').textContent.trim();
   const updatedGuest = { ...guests[folio] };  // Menyalin data tamu sebelum update
   
   const fileInput = document.querySelector('#edit-photo');
@@ -1179,11 +1228,16 @@ document.getElementById('update-guest-form').addEventListener('submit', async (e
       });
       
       const result = await response.json();
+      console.log("Upload Result:", result); // Debugging response dari server
+      
       if (result.success) {
         // Gambar berhasil di-upload, simpan URL-nya
         imageUrl = result.imageUrl;
         updatedGuest.photoUrl = imageUrl;
-        
+
+        // Log URL yang ingin disimpan di Firebase
+        console.log("Image URL to save in Firebase:", imageUrl);
+
         // Update the image URL under GUESTIMAGE/{folio}/imageUrl
         await set(ref(db, `GUESTIMAGE/${folio}/imageUrl`), imageUrl);
       } else {
@@ -1204,6 +1258,7 @@ document.getElementById('update-guest-form').addEventListener('submit', async (e
   displayGuests(); // Memperbarui tampilan tabel
   document.getElementById('edit-modal').classList.add('hidden'); // Menutup modal
 });
+
 
 </script>
   
