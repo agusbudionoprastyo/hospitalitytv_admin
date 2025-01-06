@@ -1204,7 +1204,7 @@ document.getElementById('update-guest-form').addEventListener('submit', async (e
       
       if (result.success) {
         // Gambar berhasil di-upload, simpan URL-nya
-        imageUrl = 'https://hospitalitytv.dafam.cloud/' + result.imageUrl;
+        imageUrl = result.imageUrl;
         updatedGuest.photoUrl = imageUrl;
 
         // Log URL yang ingin disimpan di Firebase
