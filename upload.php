@@ -12,6 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Tentukan direktori penyimpanan
         $uploadDir = 'assets/';
+
+        // Cek apakah folder 'assets/' ada, jika tidak, buat folder tersebut
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true); // Membuat folder dengan izin 755
+        }
+
         $fileName = uniqid() . '_' . basename($file['name']);
         $uploadFile = $uploadDir . $fileName;
 
@@ -33,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (move_uploaded_file($file['tmp_name'], $uploadFile)) {
             // Membuat URL yang dapat diakses melalui web
             $imageUrl = 'https://hospitalitytv.dafam.cloud/' . $uploadFile;
-            
+
             // Kirimkan URL gambar
             echo json_encode(['success' => true, 'imageUrl' => $imageUrl]);
         } else {

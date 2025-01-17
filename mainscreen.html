@@ -4,13 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-      Form Layout | TailAdmin - Tailwind CSS Admin Dashboard Template
-    </title>
-  <link rel="icon" href="favicon.ico"><link href="main.css" rel="stylesheet"></head>
+    <title>Main Screen</title>
+  <link rel="icon" href="favicon.ico"><link href="main.css" rel="stylesheet"><link href="mainscreen.css" rel="stylesheet"></head>
 
   <body
-    x-data="{ page: 'formLayout', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
+    x-data="{ page: 'main screen', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
     x-init="
           darkMode = JSON.parse(localStorage.getItem('darkMode'));
           $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
@@ -765,338 +763,166 @@
         <!-- ===== Main Content Start ===== -->
         <main>
           <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
-            <!-- Breadcrumb Start -->
-            <div
-              class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
-            >
-              <h2 class="text-title-md2 font-bold text-black dark:text-white">
-                Form Layout
-              </h2>
-
-              <nav>
-                <ol class="flex items-center gap-2">
-                  <li>
-                    <a class="font-medium" href="index.html">Dashboard /</a>
-                  </li>
-                  <li class="font-medium text-primary">Form Layout</li>
-                </ol>
-              </nav>
-            </div>
-            <!-- Breadcrumb End -->
-
-            <!-- ====== Form Layout Section Start -->
-            <div class="grid grid-cols-1 gap-9 sm:grid-cols-2">
-              <div class="flex flex-col gap-9">
-                <!-- Contact Form -->
-                <div
-                  class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark"
-                >
-                  <div
-                    class="border-b border-stroke px-6.5 py-4 dark:border-strokedark"
-                  >
-                    <h3 class="font-medium text-black dark:text-white">
-                      Contact Form
-                    </h3>
-                  </div>
-                  <form action="#">
-                    <div class="p-6.5">
-                      <div class="mb-4.5 flex flex-col gap-6 xl:flex-row">
-                        <div class="w-full xl:w-1/2">
-                          <label
-                            class="mb-3 block text-sm font-medium text-black dark:text-white"
-                          >
-                            First name
-                          </label>
-                          <input
-                            type="text"
-                            placeholder="Enter your first name"
-                            class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                          />
-                        </div>
-
-                        <div class="w-full xl:w-1/2">
-                          <label
-                            class="mb-3 block text-sm font-medium text-black dark:text-white"
-                          >
-                            Last name
-                          </label>
-                          <input
-                            type="text"
-                            placeholder="Enter your last name"
-                            class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                          />
-                        </div>
-                      </div>
-
-                      <div class="mb-4.5">
-                        <label
-                          class="mb-3 block text-sm font-medium text-black dark:text-white"
-                        >
-                          Email <span class="text-meta-1">*</span>
-                        </label>
-                        <input
-                          type="email"
-                          placeholder="Enter your email address"
-                          class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                        />
-                      </div>
-
-                      <div class="mb-4.5">
-                        <label
-                          class="mb-3 block text-sm font-medium text-black dark:text-white"
-                        >
-                          Subject
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="Select subject"
-                          class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                        />
-                      </div>
-
-                      <div class="mb-4.5">
-                        <label
-                          class="mb-3 block text-sm font-medium text-black dark:text-white"
-                        >
-                          Subject
-                        </label>
-                        <div
-                          x-data="{ isOptionSelected: false }"
-                          class="relative z-20 bg-transparent dark:bg-form-input"
-                        >
-                          <select
-                            class="relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                            :class="isOptionSelected && 'text-black dark:text-white'"
-                            @change="isOptionSelected = true"
-                          >
-                            <option value="" class="text-body">
-                              Type your subject
-                            </option>
-                            <option value="" class="text-body">USA</option>
-                            <option value="" class="text-body">UK</option>
-                            <option value="" class="text-body">Canada</option>
-                          </select>
-                          <span
-                            class="absolute right-4 top-1/2 z-30 -translate-y-1/2"
-                          >
-                            <svg
-                              class="fill-current"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <g opacity="0.8">
-                                <path
-                                  fill-rule="evenodd"
-                                  clip-rule="evenodd"
-                                  d="M5.29289 8.29289C5.68342 7.90237 6.31658 7.90237 6.70711 8.29289L12 13.5858L17.2929 8.29289C17.6834 7.90237 18.3166 7.90237 18.7071 8.29289C19.0976 8.68342 19.0976 9.31658 18.7071 9.70711L12.7071 15.7071C12.3166 16.0976 11.6834 16.0976 11.2929 15.7071L5.29289 9.70711C4.90237 9.31658 4.90237 8.68342 5.29289 8.29289Z"
-                                  fill=""
-                                ></path>
-                              </g>
-                            </svg>
-                          </span>
-                        </div>
-                      </div>
-
-                      <div class="mb-6">
-                        <label
-                          class="mb-3 block text-sm font-medium text-black dark:text-white"
-                        >
-                          Message
-                        </label>
-                        <textarea
-                          rows="6"
-                          placeholder="Type your message"
-                          class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                        ></textarea>
-                      </div>
-
-                      <button
-                        class="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray hover:bg-opacity-90"
-                      >
-                        Send Message
-                      </button>
-                    </div>
-                  </form>
-                </div>
+            <div class="mx-auto max-w-full">
+              <!-- Breadcrumb Start -->
+              <div
+                class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+              >
+                <h2 class="text-title-md2 font-bold text-black dark:text-white">
+                  Main Screen
+                </h2>
               </div>
+              <!-- Breadcrumb End -->
 
-              <div class="flex flex-col gap-9">
-                <!-- Sign In Form -->
-                <div
-                  class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark"
-                >
-                  <div
-                    class="border-b border-stroke px-6.5 py-4 dark:border-strokedark"
-                  >
-                    <h3 class="font-medium text-black dark:text-white">
-                      Sign In Form
-                    </h3>
-                  </div>
-                  <form action="#">
-                    <div class="p-6.5">
-                      <div class="mb-4.5">
-                        <label
-                          class="mb-3 block text-sm font-medium text-black dark:text-white"
-                        >
-                          Email
-                        </label>
-                        <input
-                          type="email"
-                          placeholder="Enter your email address"
-                          class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                        />
-                      </div>
-
-                      <div>
-                        <label
-                          class="mb-3 block text-sm font-medium text-black dark:text-white"
-                        >
-                          Password
-                        </label>
-                        <input
-                          type="password"
-                          placeholder="Enter password"
-                          autocomplete="new-password"
-                          class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                        />
-                      </div>
-
-                      <div
-                        class="mb-5.5 mt-5 flex items-center justify-between"
-                      >
-                        <label for="formCheckbox" class="flex cursor-pointer">
-                          <div class="relative pt-0.5">
-                            <input
-                              type="checkbox"
-                              id="formCheckbox"
-                              class="taskCheckbox sr-only"
-                            />
-                            <div
-                              class="box mr-3 flex h-5 w-5 items-center justify-center rounded border border-stroke dark:border-form-strokedark dark:bg-form-input"
-                            >
-                              <span class="text-white opacity-0">
+              <!-- ====== Profile Section Start -->
+              <div class="overflow-hidden border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+                  <div class="relative z-20 h-full md:h-full">
+                    <!-- <img
+                      src="./images/cover/wallpaper.png"
+                      alt="profile cover"
+                      class="h-full w-full object-cover object-center"
+                    /> -->
+                    <img id="wallpaper-img" alt="profile cover" class="h-full w-full object-cover object-center" />
+                    <!-- Overlay Blur Section -->
+                    <div class="absolute inset-0 z-30 rounded-[40px] bg-white/10 m-3 backdrop-blur">
+                      <div class="px-4 pb-6 text-center lg:pb-8 xl:pb-11.5">
+                        <div class="mt-4">
+                          <p class="flex items-center text-left font-medium text-white">
+                            <label for="wallpaper" class="cursor-pointer mr-2 w-10 h-10 bg-primary text-white rounded-full inline-flex items-center justify-center hover:bg-opacity-80">
+                              <input type="file" id="wallpaper" class="sr-only" />
                                 <svg
                                   class="fill-current"
-                                  width="10"
-                                  height="7"
-                                  viewBox="0 0 10 7"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    fill-rule="evenodd"
-                                    clip-rule="evenodd"
-                                    d="M9.70685 0.292804C9.89455 0.480344 10 0.734667 10 0.999847C10 1.26503 9.89455 1.51935 9.70685 1.70689L4.70059 6.7072C4.51283 6.89468 4.2582 7 3.9927 7C3.72721 7 3.47258 6.89468 3.28482 6.7072L0.281063 3.70701C0.0986771 3.5184 -0.00224342 3.26578 3.785e-05 3.00357C0.00231912 2.74136 0.10762 2.49053 0.29326 2.30511C0.4789 2.11969 0.730026 2.01451 0.992551 2.01224C1.25508 2.00996 1.50799 2.11076 1.69683 2.29293L3.9927 4.58607L8.29108 0.292804C8.47884 0.105322 8.73347 0 8.99896 0C9.26446 0 9.51908 0.105322 9.70685 0.292804Z"
-                                    fill=""
-                                  />
-                                </svg>
-                              </span>
+                                  width="14"
+                                  height="14" 
+                                  xmlns="http://www.w3.org/2000/svg" 
+                                  viewBox="0 0 512 512"
+                                  >
+                                  <path d="M162.4 6c-1.5-3.6-5-6-8.9-6l-19 0c-3.9 0-7.5 2.4-8.9 6L104.9 57.7c-3.2 8-14.6 8-17.8 0L66.4 6c-1.5-3.6-5-6-8.9-6L48 0C21.5 0 0 21.5 0 48L0 224l0 22.4L0 256l9.6 0 364.8 0 9.6 0 0-9.6 0-22.4 0-176c0-26.5-21.5-48-48-48L230.5 0c-3.9 0-7.5 2.4-8.9 6L200.9 57.7c-3.2 8-14.6 8-17.8 0L162.4 6zM0 288l0 32c0 35.3 28.7 64 64 64l64 0 0 64c0 35.3 28.7 64 64 64s64-28.7 64-64l0-64 64 0c35.3 0 64-28.7 64-64l0-32L0 288zM192 432a16 16 0 1 1 0 32 16 16 0 1 1 0-32z"/>
+                              </svg>
+                            </label>
+                            wallpaper
+                          </p>
+                            <div class="flex justify-between p-4">
+                              <div class="text-title-md2 font-bold text-black dark:text-white text-left">
+                                <p>Guest Name</p>
+                                <p>Enjoy Your Stay!</p>
+                                <p>Room Number | Room Type</p>
+                              </div>
+        
+                              <div>
+                                <img src="src/images/logo/dafamlogo.svg" alt="Logo" class="w-24 h-24">
+                              </div>
+        
+                              <div class="text-title-md2 font-bold text-black dark:text-white text-right">
+                                <p>Local Clock</p>
+                                <p>Local Date</p>
+                                <p class="flex items-center text-right">
+                                  <button class="cursor-pointer m-2 w-8 h-8 bg-primary text-white rounded-full flex items-center justify-center hover:bg-opacity-80">
+                                    <span>
+                                      <svg
+                                        class="fill-current"
+                                        width="14"
+                                        height="14" 
+                                        xmlns="http://www.w3.org/2000/svg" 
+                                        viewBox="0 0 512 512"
+                                        >
+                                        <path d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/>
+                                      </svg>
+                                    </span>
+                                  </button>
+                                  Weather
+                                </p>
+                              </div>
+                          </div>
+                        </div>
+
+                        <div class="mx-auto max-w-full">
+                          <div class="flex p-4 justify-between items-center">
+                          <!-- Box 1 (Video) -->
+                          <div class="w-1/2 h-80 bg-white/30 z-20 rounded-[32px] p-4 mr-4 flex flex-col justify-center items-center">
+                            <h3 class="text-lg font-semibold text-white">Video</h3>
+                            <p class="text-white mb-4">This is the content for company profile or etc.</p>
+                            <label for="video" class="cursor-pointer inline-flex items-center justify-center gap-2.5 bg-primary rounded-full px-4 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
+                              <input type="file" id="video" class="sr-only" />
+                                <span>
+                                  <svg 
+                                    xmlns="http://www.w3.org/2000/svg" 
+                                    class="fill-current"
+                                    width="20"
+                                    height="20"
+                                    viewBox="0 0 576 512">
+                                    <path d="M0 128C0 92.7 28.7 64 64 64l256 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2l0 256c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1l0-17.1 0-128 0-17.1 14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z"/>
+                                  </svg>
+                                </span>
+                              Upload
+                            </label>
+                          </div>
+                          <!-- Box 2 (Image) -->
+                          <div class="w-3/4 h-80 bg-white/30 z-20 rounded-[32px] p-4 ml-4 flex flex-col justify-center items-center">
+                            <h3 class="text-lg font-semibold text-white">Image</h3>
+                              <p class="text-white mb-4">This is the content for promo</p>
+                                <label for="image" class="cursor-pointer inline-flex items-center justify-center gap-2.5 bg-primary rounded-full px-4 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
+                                  <input type="file" id="image" class="sr-only" />
+                                    <span>
+                                      <svg 
+                                        xmlns="http://www.w3.org/2000/svg" 
+                                        class="fill-current"
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 512 512">
+                                        <path d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/>
+                                      </svg>
+                                    </span>
+                                  Upload
+                                </label>
                             </div>
                           </div>
-                          <p>Remember me</p>
-                        </label>
-
-                        <a href="#" class="text-sm text-primary hover:underline"
-                          >Forget password?</a
-                        >
+                        </div>
+                    
+                        <div class="mt-10.5">
+                          <div class="flex items-center justify-center gap-3.5 m-4">
+                            <!-- button -->
+                            <div class="h-25 w-35 bg-white/30 rounded-[24px] p-4 flex flex-col justify-center items-center">
+                              <h3 class="text-md font-semibold text-white">Hotel Guide</h3>
+                            </div>
+                            <div class="h-25 w-35 bg-white/30 rounded-[24px] p-4 flex flex-col justify-center items-center">
+                              <h3 class="text-md font-semibold text-white">Guest Request</h3>
+                            </div>
+                            <div class="h-25 w-35 bg-white/30 rounded-[24px] p-4 flex flex-col justify-center items-center">
+                              <h3 class="text-md font-semibold text-white">Laundry</h3>
+                            </div>
+                            <div class="h-25 w-35 bg-white/30 rounded-[24px] p-4 flex flex-col justify-center items-center">
+                              <h3 class="text-md font-semibold text-white">Room Service</h3>
+                            </div>
+                            <div class="h-25 w-35 bg-white/30 rounded-[24px] p-4 flex flex-col justify-center items-center">
+                              <h3 class="text-md font-semibold text-white">Tv Channel</h3>
+                            </div>
+                            <div class="h-25 w-35 bg-white/30 rounded-[24px] p-4 flex flex-col justify-center items-center">
+                              <h3 class="text-md font-semibold text-white">Youtube</h3>
+                            </div>
+                            <div class="h-25 w-35 bg-white/30 rounded-[24px] p-4 flex flex-col justify-center items-center">
+                              <h3 class="text-md font-semibold text-white">Spotify</h3>
+                            </div>
+                            <div class="h-25 w-35 bg-white/30 rounded-[24px] p-4 flex flex-col justify-center items-center">
+                              <h3 class="text-md font-semibold text-white">Netflix</h3>
+                            </div>
+                            <div class="h-25 w-35 bg-white/30 rounded-[24px] p-4 flex flex-col justify-center items-center">
+                              <h3 class="text-md font-semibold text-white">Disney+</h3>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-
-                      <button
-                        class="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray hover:bg-opacity-90"
-                      >
-                        Sign In
-                      </button>
                     </div>
-                  </form>
-                </div>
-
-                <!-- Sign Up Form -->
-                <div
-                  class="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark"
-                >
-                  <div
-                    class="border-b border-stroke px-6.5 py-4 dark:border-strokedark"
-                  >
-                    <h3 class="font-medium text-black dark:text-white">
-                      Sign Up Form
-                    </h3>
                   </div>
-                  <form action="#">
-                    <div class="p-6.5">
-                      <div class="mb-4.5">
-                        <label
-                          class="mb-3 block text-sm font-medium text-black dark:text-white"
-                        >
-                          Name
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="Enter your full name"
-                          class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                        />
-                      </div>
-
-                      <div class="mb-4.5">
-                        <label
-                          class="mb-3 block text-sm font-medium text-black dark:text-white"
-                        >
-                          Email
-                        </label>
-                        <input
-                          type="email"
-                          placeholder="Enter your email address"
-                          class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                        />
-                      </div>
-
-                      <div class="mb-4.5">
-                        <label
-                          class="mb-3 block text-sm font-medium text-black dark:text-white"
-                        >
-                          Password
-                        </label>
-                        <input
-                          type="password"
-                          placeholder="Enter password"
-                          autocomplete="password"
-                          class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                        />
-                      </div>
-
-                      <div class="mb-5.5">
-                        <label
-                          class="mb-3 block text-sm font-medium text-black dark:text-white"
-                        >
-                          Re-type Password
-                        </label>
-                        <input
-                          type="password"
-                          placeholder="Re-enter password"
-                          autocomplete="re-enter-password"
-                          class="w-full rounded border-[1.5px] border-stroke bg-transparent px-5 py-3 font-normal text-black outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
-                        />
-                      </div>
-
-                      <button
-                        class="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray hover:bg-opacity-90"
-                      >
-                        Sign Up
-                      </button>
-                    </div>
-                  </form>
                 </div>
               </div>
             </div>
-            <!-- ====== Form Layout Section End -->
-          </div>
+          <!-- ====== Profile Section End -->
         </main>
         <!-- ===== Main Content End ===== -->
       </div>
       <!-- ===== Content Area End ===== -->
-    </div>
-    <!-- ===== Page Wrapper End ===== -->
-  <script defer src="main.bundle.js"></script></body>
+  </div>
+  <!-- ===== Page Wrapper End ===== -->
+<script defer src="main.bundle.js"></script><script defer src="mainscreen.bundle.js"></script></body>
 </html>
