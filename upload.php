@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Tentukan direktori penyimpanan
-        $uploadDir = 'assets/';
+        $uploadDir = 'assets/image/';
 
         // Cek apakah folder 'assets/' ada, jika tidak, buat folder tersebut
         if (!is_dir($uploadDir)) {

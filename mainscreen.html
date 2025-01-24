@@ -619,9 +619,9 @@
         >
           <span class="hidden text-right lg:block">
             <span class="block text-sm font-medium text-black dark:text-white"
-              >Thomas Anree</span
+              >Ag</span
             >
-            <span class="block text-xs font-medium">UX Designer</span>
+            <span class="block text-xs font-medium">Software Engineer</span>
           </span>
 
           <span class="h-12 w-12 rounded-full">
@@ -777,11 +777,6 @@
               <!-- ====== Profile Section Start -->
               <div class="overflow-hidden border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
                   <div class="relative z-20 h-full md:h-full">
-                    <!-- <img
-                      src="./images/cover/wallpaper.png"
-                      alt="profile cover"
-                      class="h-full w-full object-cover object-center"
-                    /> -->
                     <img id="wallpaper-img" alt="profile cover" class="h-full w-full object-cover object-center" />
                     <!-- Overlay Blur Section -->
                     <div class="absolute inset-0 z-30 rounded-[40px] bg-white/10 m-3 backdrop-blur">
@@ -838,44 +833,45 @@
 
                         <div class="mx-auto max-w-full">
                           <div class="flex p-4 justify-between items-center">
-                          <!-- Box 1 (Video) -->
-                          <div class="w-1/2 h-80 bg-white/30 z-20 rounded-[32px] p-4 mr-4 flex flex-col justify-center items-center">
-                            <h3 class="text-lg font-semibold text-white">Video</h3>
-                            <p class="text-white mb-4">This is the content for company profile or etc.</p>
-                            <label for="video" class="cursor-pointer inline-flex items-center justify-center gap-2.5 bg-primary rounded-full px-4 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
-                              <input type="file" id="video" class="sr-only" />
-                                <span>
-                                  <svg 
-                                    xmlns="http://www.w3.org/2000/svg" 
-                                    class="fill-current"
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 576 512">
-                                    <path d="M0 128C0 92.7 28.7 64 64 64l256 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2l0 256c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1l0-17.1 0-128 0-17.1 14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z"/>
-                                  </svg>
-                                </span>
-                              Upload
-                            </label>
-                          </div>
-                          <!-- Box 2 (Image) -->
-                          <div class="w-3/4 h-80 bg-white/30 z-20 rounded-[32px] p-4 ml-4 flex flex-col justify-center items-center">
-                            <h3 class="text-lg font-semibold text-white">Image</h3>
-                              <p class="text-white mb-4">This is the content for promo</p>
-                                <label for="image" class="cursor-pointer inline-flex items-center justify-center gap-2.5 bg-primary rounded-full px-4 py-4 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10">
-                                  <input type="file" id="image" class="sr-only" />
+                            
+                              <!-- Box 1 (Video) -->
+                              <div class="w-1/2 h-80 z-20 rounded-[32px] mr-4 flex flex-col justify-center items-center relative">
+                                <video id="video-player" class="w-full h-full object-cover z-10 rounded-[32px]" autoplay muted>
+                                  <source id="video-source" type="video/mp4">
+                                </video>
+
+                                <div class="absolute inset-0 z-20 text-center flex flex-col justify-center items-center">
+                                  <button id="openVideoModal" class="cursor-pointer inline-flex items-center justify-center gap-2.5 bg-black bg-opacity-80 rounded-full px-4 py-4 text-center font-medium text-white hover:bg-opacity-100 lg:px-8 xl:px-10">
                                     <span>
                                       <svg 
                                         xmlns="http://www.w3.org/2000/svg" 
                                         class="fill-current"
                                         width="20"
                                         height="20"
-                                        viewBox="0 0 512 512">
+                                        viewBox="0 0 576 512">
+                                        <path d="M0 128C0 92.7 28.7 64 64 64l256 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128zM559.1 99.8c10.4 5.6 16.9 16.4 16.9 28.2l0 256c0 11.8-6.5 22.6-16.9 28.2s-23 5-32.9-1.6l-96-64L416 337.1l0-17.1 0-128 0-17.1 14.2-9.5 96-64c9.8-6.5 22.4-7.2 32.9-1.6z"/>
+                                      </svg>
+                                    </span>
+                                    Upload
+                                  </button>
+                                </div>
+                              </div>
+
+                              <!-- Box 2 (Image) -->
+                              <div class="w-3/4 h-80 z-20 rounded-[32px] ml-4 flex flex-col justify-center items-center relative">
+                                <img id="slideshow-image" class="w-full h-full object-cover z-10 rounded-[32px]" alt="Slideshow Image" />
+
+                                <div class="absolute inset-0 z-20 text-center flex flex-col justify-center items-center">
+                                  <button id="openImageModal" class="cursor-pointer inline-flex items-center justify-center gap-2.5 bg-black bg-opacity-80 rounded-full px-4 py-4 text-center font-medium text-white hover:bg-opacity-100 lg:px-8 xl:px-10">
+                                    <span>
+                                      <svg xmlns="http://www.w3.org/2000/svg" class="fill-current" width="20" height="20" viewBox="0 0 512 512">
                                         <path d="M0 96C0 60.7 28.7 32 64 32l384 0c35.3 0 64 28.7 64 64l0 320c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6l96 0 32 0 208 0c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"/>
                                       </svg>
                                     </span>
-                                  Upload
-                                </label>
-                            </div>
+                                    Upload
+                                  </button>
+                                </div>
+                              </div>
                           </div>
                         </div>
                     
@@ -918,11 +914,109 @@
               </div>
             </div>
           <!-- ====== Profile Section End -->
+          
         </main>
         <!-- ===== Main Content End ===== -->
       </div>
       <!-- ===== Content Area End ===== -->
   </div>
   <!-- ===== Page Wrapper End ===== -->
+
+<div class="hidden ml-72.5 fixed inset-0 inline-flex items-center justify-center z-50 bg-black bg-opacity-50 md:inset-0 h-modal sm:h-full" id="videoModal">
+  <div class="relative w-full h-full max-w-screen-lg px-4 md:h-auto">
+    <div class="relative bg-white rounded-sm shadow dark:bg-gray-800">
+      <div class="flex justify-end p-2">
+        <button type="button" id="closeVideoModal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-sm text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+      </div>
+      <div class="p-6 pt-0 text-center">
+        <table class="min-w-full table-auto border-collapse text-left">
+          <thead class="bg-gray-200 text-left dark:bg-gray-700">
+            <tr>
+              <th class="px-4 py-4 font-medium text-black dark:text-white">
+                Thumbnails
+              </th>
+              <th class="px-4 py-4 font-medium text-black dark:text-white">
+                Video URL 
+              </th>
+              <th class="px-4 py-4 font-medium text-black dark:text-white">
+                ID
+              </th>
+              <th class="px-4 py-4 font-medium text-black dark:text-white">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody id="videoList"></tbody>
+          <tfoot>
+            <tr>
+              <td>
+                <button id="addGuestRequestBtn" class="flex items-center justify-center text-dark px-4 py-2 hover:text-primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512" class="fill-current mr-2">
+                    <path fill="text-primary" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
+                  </svg>
+                  Add Item
+                </button>
+              </td>              
+              <td colspan="4" class="py-4 text-center">
+                <ul id="pagination" class="flex -space-x-px justify-end"></ul>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="hidden ml-72.5 fixed inset-0 inline-flex items-center justify-center z-50 bg-black bg-opacity-50 md:inset-0 h-modal sm:h-full" id="imageModal">
+  <div class="relative w-full h-full max-w-screen-lg px-4 md:h-auto">
+    <div class="relative bg-white rounded-sm shadow dark:bg-gray-800">
+      <div class="flex justify-end p-2">
+        <button type="button" id="closeImageModal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-sm text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-700 dark:hover:text-white">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        </button>
+      </div>
+      <div class="p-6 pt-0 text-center">
+        <table class="min-w-full table-auto border-collapse text-left">
+          <thead class="bg-gray-200 text-left dark:bg-gray-700">
+            <tr>
+              <th class="px-4 py-4 font-medium text-black dark:text-white">
+                Thumbnails
+              </th>
+              <th class="px-4 py-4 font-medium text-black dark:text-white">
+                Image URL 
+              </th>
+              <th class="px-4 py-4 font-medium text-black dark:text-white">
+                ID
+              </th>
+              <th class="px-4 py-4 font-medium text-black dark:text-white">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody id="imageList"></tbody>
+          <tfoot>
+            <tr>
+              <td>
+                <button id="addImageBtn" class="flex items-center justify-center text-dark px-4 py-2 hover:text-primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14" viewBox="0 0 512 512" class="fill-current mr-2">
+                    <path fill="text-primary" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/>
+                  </svg>
+                  Add Item
+                </button>
+              </td>              
+              <td colspan="4" class="py-4 text-center">
+                <ul id="pagination" class="flex -space-x-px justify-end"></ul>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script defer src="main.bundle.js"></script><script defer src="mainscreen.bundle.js"></script></body>
 </html>
